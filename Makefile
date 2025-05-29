@@ -1,7 +1,7 @@
 # Variables
 CC			= cc
 RM			= rm -f
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 NAME		= push_swap
 INCLUDE		= -Iinclude -Ilibft/include
 LINK		= -Llibft -lft

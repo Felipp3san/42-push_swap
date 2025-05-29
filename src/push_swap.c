@@ -6,46 +6,54 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:39:42 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/28 20:44:44 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:57:33 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack)
+void	print_stacks(t_stack *a, t_stack *b)
 {
-	ssize_t	i;
+	size_t	i;
+	size_t	max;
 
-	if (stack->size == 0)
+	if (a->size == 0 && b->size == 0)
 	{
-		ft_printf("Stack is empty! \n");
+		ft_printf("Stacks are empty!\n");
 		return ;
 	}
-	i = stack->size - 1;
-	ft_printf("|==== STACK =====|\n");
-	while (i >= 0)
+	if (a->size > b->size)
+		max = a->size - 1;
+	else
+		max = b->size - 1;
+	i = 0;
+	while (i <= max)
 	{
-		ft_printf("|== %d ==|\n", stack->collection[i]);
-		i--;
+		if (a->size > i)
+			ft_printf("%-10d", a->collection[(a->size - 1) - i]);
+		ft_printf("||");
+		if (b->size > i)
+			ft_printf("%10d", b->collection[(b->size - 1) - i]);
+		ft_printf("\n");
+		i++;
 	}
-	ft_printf("|================|\n");
+	ft_printf("-----------------------\n");
+	ft_printf("     a    ||     b    \n\n", 'a', 'b');
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
 	t_stack	*b;
-	size_t	capacity;
-	size_t		i;
 	int		*collection;
-	int		result;
+	size_t	capacity;
+	size_t	i;
 
 	if (argc > 1)
 	{
 		capacity = argc - 1;
 		a = create_stack(capacity);
 		b = create_stack(capacity);
-
 		collection = (int *) malloc(sizeof(int) * capacity);
 		i = 0;
 		while (i < capacity)
@@ -58,22 +66,13 @@ int	main(int argc, char *argv[])
 		while (i < capacity)
 		{
 			push(a, collection[i]);
-			push(b, collection[i]);
 			i++;
 		}
-
-		print_stack(a);
-
-		while(a->size != 0)
-		{
-			pop(a, &result);
-			ft_printf("Popped number: %d\n", result);
-		}
-		print_stack(a);
-		push(a, 999);
-		ft_printf("\n");
-		print_stack(a);
-
+		print_stacks(a, b);
+		rotate_a(a);
+		print_stacks(a, b);
+		reverse_rotate_a(a);
+		print_stacks(a, b);
 		destroy_stack(a);
 		destroy_stack(b);
 		free(collection);
