@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	print_stacks(t_stack *a, t_stack *b)
 {
@@ -41,6 +42,32 @@ void	print_stacks(t_stack *a, t_stack *b)
 	ft_printf("     a    ||     b    \n\n", 'a', 'b');
 }
 
+int	is_sorted(t_stack *stack)
+{
+	int		is_sorted;
+	size_t	i;
+
+	i = 0;
+	is_sorted = 1;
+	while (i < stack->size - 1)
+	{
+		if (stack->collection[i] < stack->collection[i + 1])
+		{
+			is_sorted = 0;
+			break ;
+		}
+		i++;
+	}
+	return (is_sorted);
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	(void) b;
+	int number = a->collection[0] >> 0 & 1;
+	printf("%d\n", number);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -61,17 +88,14 @@ int	main(int argc, char *argv[])
 			collection[i] = ft_atoi(argv[i + 1]);
 			i++;
 		}
-
 		i = 0;
 		while (i < capacity)
 		{
 			push(a, collection[i]);
 			i++;
 		}
-		print_stacks(a, b);
-		rotate_a(a);
-		print_stacks(a, b);
-		reverse_rotate_a(a);
+		radix_sort(a, b);
+		//ft_printf("Instructions required: %d\n", sort_stack(a, b));
 		print_stacks(a, b);
 		destroy_stack(a);
 		destroy_stack(b);
@@ -80,3 +104,36 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
+//int	sort_stack(t_stack *a, t_stack *b)
+//
+//{
+//	int	pivot;
+//	int	counter;
+//
+//	counter = 0;
+//	while (!is_sorted(a))
+//	{
+//		pivot = a->collection[0];
+//		if (a->collection[a->size - 1] == pivot)
+//		{
+//			while (!is_empty(b))
+//			{
+//				push_a(a, b);
+//				counter++;
+//			}
+//		}
+//		if (a->collection[a->size - 1] > a->collection[a->size - 2])
+//			swap_a(a);
+//		else if (a->collection[a->size - 1] > pivot)
+//			rotate_a(a);
+//		else if (a->collection[a->size - 1] < pivot)
+//			push_b(a, b);
+//		while (is_sorted(a) && !is_empty(b))
+//		{
+//			push_a(a, b);
+//			counter++;
+//		}
+//		counter++;
+//	}
+//	return (counter);
+//}
