@@ -13,6 +13,137 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+int	is_sorted(t_stack *stack)
+{
+	int		is_sorted;
+	size_t	i;
+
+	i = 0;
+	is_sorted = 1;
+	while (i < stack->size - 1)
+	{
+		if (stack->collection[i] < stack->collection[i + 1])
+		{
+			is_sorted = 0;
+			break ;
+		}
+		i++;
+	}
+	return (is_sorted);
+}
+
+int	normalize_stack(t_stack *stack)
+{
+	size_t	i;
+	size_t	j;
+	int		*new_coll;
+
+	new_coll = (int *) ft_calloc(stack->size, sizeof(int));
+	if (!new_coll)
+		return (-1);
+	i = 0;
+	while (i < stack->size)
+	{
+		j = 0;
+		while (j < stack->size)
+		{
+			if (stack->collection[j] < stack->collection[i])
+				new_coll[i] += 1;
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < stack->size)
+		stack->collection[i] = new_coll[i], i++;
+	return (free(new_coll), 0);
+}
+
+/* get the max number bit count ex: decimal 10 = binary 1010 and is 4 bits */
+size_t	max_nbr_bitsize(t_stack *stack)
+{
+	int		max_nbr;
+	int		bits;
+	size_t	i;
+
+	i = 1;
+	max_nbr = stack->collection[0];
+	while (i < stack->size)
+	{
+		if (stack->collection[i] > max_nbr)
+			max_nbr = stack->collection[i];
+		i++;
+	}
+	bits = 0;
+	while (max_nbr > 0)
+	{
+		max_nbr >>= 1;
+		bits++;
+	}
+	return (bits);
+}
+
+/* Verify if all bits in the current shift starts 
+ * with 0's and end with 1's or if are all 1's */
+int	check_bit_uniformity(t_stack *stack, int bit_shift)
+{
+	int		last_bit;
+	int		bit_changes;
+	ssize_t	i;
+
+	bit_changes = 0;
+	i = stack->size - 1;
+	last_bit = stack->collection[i--] >> bit_shift & 1;
+	if (last_bit == 1)
+		return (0);
+	while (i >= 0)
+	{
+		if ((stack->collection[i] >> bit_shift & 1) != last_bit)
+		{
+			last_bit = stack->collection[i] >> bit_shift & 1;
+			bit_changes++;
+		}
+		if (bit_changes > 1)
+			return (0);
+		i--;
+	}
+	return (1);
+}
+
+size_t	radix_sort(t_stack *a, t_stack *b)
+{
+	int		bit_shift;
+	int		bit_limit;
+	size_t	top_idx;
+	size_t	steps;
+
+	steps = 0;
+	bit_shift = 0;
+	bit_limit = max_nbr_bitsize(a);
+	while ((bit_shift <= bit_limit) && !is_sorted(a))
+	{
+		top_idx = a->size - 1;
+		while (!check_bit_uniformity(a, bit_shift))
+		{
+			if(a->collection[top_idx] >> bit_shift & 1)
+				rotate_a(a);
+			else
+			{
+				push_b(a, b);
+				top_idx--;
+			}
+			steps++;
+		}
+		while (!is_empty(b))
+		{
+			push_a(a, b);
+			steps++;
+		}
+		bit_shift++;
+	}
+	return (steps);
+}
+
 void	print_stacks(t_stack *a, t_stack *b)
 {
 	size_t	i;
@@ -42,32 +173,6 @@ void	print_stacks(t_stack *a, t_stack *b)
 	ft_printf("     a    ||     b    \n\n", 'a', 'b');
 }
 
-int	is_sorted(t_stack *stack)
-{
-	int		is_sorted;
-	size_t	i;
-
-	i = 0;
-	is_sorted = 1;
-	while (i < stack->size - 1)
-	{
-		if (stack->collection[i] < stack->collection[i + 1])
-		{
-			is_sorted = 0;
-			break ;
-		}
-		i++;
-	}
-	return (is_sorted);
-}
-
-void	radix_sort(t_stack *a, t_stack *b)
-{
-	(void) b;
-	int number = a->collection[0] >> 0 & 1;
-	printf("%d\n", number);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -94,8 +199,10 @@ int	main(int argc, char *argv[])
 			push(a, collection[i]);
 			i++;
 		}
-		radix_sort(a, b);
-		//ft_printf("Instructions required: %d\n", sort_stack(a, b));
+		normalize_stack(a);
+		print_stacks(a, b);
+		printf("Instructions required: %lu\n", radix_sort(a, b));
+		printf("===========================\n");
 		print_stacks(a, b);
 		destroy_stack(a);
 		destroy_stack(b);
@@ -104,36 +211,3 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-//int	sort_stack(t_stack *a, t_stack *b)
-//
-//{
-//	int	pivot;
-//	int	counter;
-//
-//	counter = 0;
-//	while (!is_sorted(a))
-//	{
-//		pivot = a->collection[0];
-//		if (a->collection[a->size - 1] == pivot)
-//		{
-//			while (!is_empty(b))
-//			{
-//				push_a(a, b);
-//				counter++;
-//			}
-//		}
-//		if (a->collection[a->size - 1] > a->collection[a->size - 2])
-//			swap_a(a);
-//		else if (a->collection[a->size - 1] > pivot)
-//			rotate_a(a);
-//		else if (a->collection[a->size - 1] < pivot)
-//			push_b(a, b);
-//		while (is_sorted(a) && !is_empty(b))
-//		{
-//			push_a(a, b);
-//			counter++;
-//		}
-//		counter++;
-//	}
-//	return (counter);
-//}
