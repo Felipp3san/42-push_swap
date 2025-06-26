@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:34:40 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/29 18:55:51 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:16:42 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define PUSH_SWAP_H
 
 #include "libft.h"
-#include "stack_utils.h"
+#include "stack_core.h"
+#include "stack_helpers.h"
+
+void	print_stacks(t_stack *a, t_stack *b);
+int		check_bit_uniformity(t_stack *stack, int bit_shift);
 
 void	swap_a(t_stack *a);
 void	swap_b(t_stack *b);

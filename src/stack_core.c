@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   stack_core.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:12:49 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/28 20:40:04 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:29:06 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack_utils.h"
+#include "stack_core.h"
+#include "stack_helpers.h"
+
+unsigned char	is_full(t_stack	*stack);
+unsigned char	is_empty(t_stack	*stack);
 
 t_stack	*create_stack(size_t capacity)
 {
@@ -41,16 +45,6 @@ void	destroy_stack(t_stack *stack)
 	stack = NULL;
 }
 
-unsigned char	is_full(t_stack	*stack)
-{
-	return (stack->size == stack->capacity);
-}
-
-unsigned char	is_empty(t_stack	*stack)
-{
-	return (stack->size == 0);
-}
-
 unsigned char	push(t_stack *stack, int item)
 {
 	if (!stack || is_full(stack))
@@ -60,7 +54,7 @@ unsigned char	push(t_stack *stack, int item)
 	return (1);
 }
 
-unsigned char	pop(t_stack *stack, int	*item)
+unsigned char	pop(t_stack *stack, int *item)
 {
 	if (!stack || is_empty(stack))
 		return (0);
