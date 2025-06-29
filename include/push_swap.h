@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:34:40 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 22:54:01 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:11:37 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	sort_three(t_ps *data, t_chunk *chunk);
 int		chunk_value(t_ps *data, t_chunk *chunk);
 int		chunk_max_value(t_ps *data, t_chunk *chunk);
 t_stack	*loc_to_stack(t_ps *data, t_loc loc);
+void	init_chunks(t_loc loc, t_chunks *chunks);
+void	init_sizes(t_chunks *chunks);
 
 // chunk_sort.c
 void	chunk_sort(t_ps *data);

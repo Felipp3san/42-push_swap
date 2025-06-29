@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:57:03 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 21:54:43 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:11:30 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,37 @@ int	chunk_max_value(t_ps *data, t_chunk *chunk)
 	return (max);
 }
 
+void	init_sizes(t_chunks *chunks)
+{
+	chunks->min.size = 0;
+	chunks->mid.size = 0;
+	chunks->max.size = 0;
+}
+
+void	init_chunks(t_loc loc, t_chunks *chunks)
+{
+	if (loc == TOP_A)
+	{
+		chunks->max.loc = BOTTOM_A;
+		chunks->mid.loc = TOP_B;
+		chunks->min.loc = BOTTOM_B;
+	}
+	else if (loc == BOTTOM_A)
+	{
+		chunks->max.loc = TOP_A;
+		chunks->mid.loc = TOP_B;
+		chunks->min.loc = BOTTOM_B;
+	}
+	else if (loc == TOP_B)
+	{
+		chunks->max.loc = TOP_A;
+		chunks->mid.loc = BOTTOM_A;
+		chunks->min.loc = BOTTOM_B;
+	}
+	else
+	{
+		chunks->max.loc = TOP_A;
+		chunks->mid.loc = BOTTOM_A;
+		chunks->min.loc = TOP_B;
+	}
+}
