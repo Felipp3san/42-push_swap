@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:39:21 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/31 14:24:29 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:29:08 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,26 @@ static void	reverse_rotate(t_stack *stack)
 /* rra (reverse rotate a): Shift down all elements of stack a by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_a(t_stack *a)
+void	reverse_rotate_a(t_ps *data)
 {
-	reverse_rotate(a);
-	ft_putstr("rra\n");
+	reverse_rotate(&data->a);
+	store_op(data, rra);
 }
 
 /* rrb (reverse rotate b): Shift down all elements of stack b by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_b(t_stack *b)
+void	reverse_rotate_b(t_ps *data)
 {
-	reverse_rotate(b);
-	ft_putstr("rrb\n");
+	reverse_rotate(&data->b);
+	store_op(data, rrb);
 }
 
 /* rrr : rra and rrb at the same time. */
 
-void	reverse_rotate_a_b(t_stack *a, t_stack *b)
+void	reverse_rotate_a_b(t_ps *data)
 {
-	reverse_rotate(a);
-	reverse_rotate(b);
-	ft_putstr("rrr\n");
+	reverse_rotate(&data->a);
+	reverse_rotate(&data->b);
+	store_op(data, rrr);
 }

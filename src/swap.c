@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:23:15 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/31 14:25:15 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:27:38 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ static void	swap(t_stack *stack)
 /* sa (swap a): Swap the first 2 elements at the top of stack a.
 	Do nothing if there is only one element or none. */
 
-void	swap_a(t_stack *a)
+void	swap_a(t_ps *data)
 {
-	swap(a);
-	ft_putstr("sa\n");
+	swap(&data->a);
+	store_op(data, sa);
 }
 
 /* sb (swap b): Swap the first 2 elements at the top of stack b.
 	Do nothing if there is only one element or none. */
 
-void	swap_b(t_stack *b)
+void	swap_b(t_ps *data)
 {
-	swap(b);
-	ft_putstr("sb\n");
+	swap(&data->b);
+	store_op(data, sb);
 }
 
 /* ss : sa and sb at the same time. */
 
-void	swap_ab(t_stack *a, t_stack *b)
+void	swap_ab(t_ps *data)
 {
-	swap(a);
-	swap(b);
-	ft_putstr("ss\n");
+	swap(&data->a);
+	swap(&data->b);
+	store_op(data, ss);
 }

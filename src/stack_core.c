@@ -1,64 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_core.c                                      :+:      :+:    :+:   */
+/*   stack_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:12:49 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/05/31 14:29:06 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/29 02:05:41 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack_core.h"
-#include "stack_helpers.h"
 
-unsigned char	is_full(t_stack	*stack);
-unsigned char	is_empty(t_stack	*stack);
-
-t_stack	*create_stack(size_t capacity)
+int	init_stack(t_stack *stack, size_t capacity)
 {
-	t_stack	*stack;
-
-	if (capacity <= 0)
-		return (NULL);
-	stack = (t_stack *) malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
 	stack->collection = (int *) malloc(sizeof(int) * capacity);
 	if (!stack->collection)
-	{
-		free(stack);
-		return (NULL);
-	}
+		return (MALLOC_ERROR);
 	stack->capacity = capacity;
 	stack->size = 0;
-	return (stack);
+	stack->top = -1;
+	stack->bottom = 0;
+	return (SUCCESS);
 }
 
-void	destroy_stack(t_stack *stack)
+t_bool	is_full(t_stack *stack)
 {
-	if (!stack)
-		return ;
-	free(stack->collection);
-	free(stack);
-	stack = NULL;
+	return (stack->size == stack->capacity);
 }
 
-unsigned char	push(t_stack *stack, int item)
+t_bool	is_empty(t_stack *stack)
+{
+	return (stack->size == 0);
+}
+
+void	push(t_stack *stack, int item)
 {
 	if (!stack || is_full(stack))
-		return (0);
+		return ;
 	stack->collection[stack->size] = item;
 	stack->size++;
-	return (1);
+	stack->top++;
 }
 
-unsigned char	pop(t_stack *stack, int *item)
+void	pop(t_stack *stack, int *item)
 {
 	if (!stack || is_empty(stack))
-		return (0);
+		return ;
 	stack->size--;
+	stack->top--;
 	*item = stack->collection[stack->size];
-	return (1);
 }
