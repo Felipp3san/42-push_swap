@@ -6,104 +6,60 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:34:40 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 23:11:37 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:41:58 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "libft.h"
 #include "stack_core.h"
 
-typedef struct s_push_swap
+typedef enum e_loc
 {
-	t_stack	a;
-	t_stack	b;
-	t_list	*op_list;
-}	t_ps;
+	TOP_A,
+	BOTTOM_A,
+	TOP_B,
+	BOTTOM_B
+}	t_loc;
 
-typedef enum e_dir
+typedef struct s_chunk
 {
-	ASC,
-	DESC
-}	t_dir;
+	t_loc	loc;
+	int		size;
+}	t_chunk;
 
-typedef enum e_op
+typedef	struct s_chunks
 {
-	null_op,
-	pa,
-	pb,
-	ra,
-	rb,
-	rr,
-	rra,
-	rrb,
-	rrr,
-	sa,
-	sb,
-	ss
-}	t_op;
-
-// push_swap.c
-void	error(t_ps *data);
-
-// op_utils.c
-void		store_op(t_ps *data, t_op op);
-void		print_ops(t_ps *data);
-const char	*op_to_str(int op);
-
-// push_swap_utils.c
-t_bool	is_sorted(t_stack *stack, t_dir direction);
-int		normalize_stack(t_stack *stack);
-
-// stack_utils.c
-int		value_from_top(t_stack *stack, int position);
-size_t	next_down(size_t idx);
-size_t	next_up(t_stack *stk, size_t idx);
-
-// swap.c
-void	swap_a(t_ps *data);
-void	swap_b(t_ps *data);
-void	swap_ab(t_ps *data);
-
-// push.c
-void	push_a(t_ps *data);
-void	push_b(t_ps *data);
-
-// rotate.c
-void	rotate_a(t_ps *data);
-void	rotate_b(t_ps *data);
-void	rotate_a_b(t_ps *data);
-
-// reverse.c
-void	reverse_rotate_a(t_ps *data);
-void	reverse_rotate_b(t_ps *data);
-void	reverse_rotate_a_b(t_ps *data);
+	t_chunk	min;
+	t_chunk	mid;
+	t_chunk	max;
+}	t_chunks;
 
 // easy_sort.c
-//void	sort_two(t_ps *data);
-void	sort_five(t_ps *data);
-
-// moves.c
-int		move_from_to(t_ps *data, t_loc from, t_loc to);
-
-// sort_tree.c
-void	sort_three(t_ps *data, t_chunk *chunk);
+//void	sort_two(t_stacks *data);
+void	sort_five(t_stacks *data);
 
 // chunk_utils.c
-int		chunk_value(t_ps *data, t_chunk *chunk);
-int		chunk_max_value(t_ps *data, t_chunk *chunk);
-t_stack	*loc_to_stack(t_ps *data, t_loc loc);
+t_stack	*loc_to_stack(t_stacks *data, t_loc loc);
+int		chunk_value(t_stacks *data, t_chunk *chunk);
+int		chunk_max_value(t_stacks *data, t_chunk *chunk);
 void	init_chunks(t_loc loc, t_chunks *chunks);
 void	init_sizes(t_chunks *chunks);
 
 // chunk_sort.c
-void	chunk_sort(t_ps *data);
-void	sort_two(t_ps *data, t_chunk *chunk);
-void	sort_one(t_ps *data, t_chunk *chunk);
+void	chunk_sort(t_stacks *data);
 
 // chunk_split.c
-void	chunk_split(t_ps *data, t_chunk *chunk, t_chunks *dest);
+void	chunk_split(t_stacks *data, t_chunk *chunk, t_chunks *dest);
+
+// moves.c
+int		move_from_to(t_stacks *data, t_loc from, t_loc to);
+
+// sort_two.c
+void	sort_two(t_stacks *data, t_chunk *chunk);
+
+// sort_tree.c
+void	sort_three(t_stacks *data, t_chunk *chunk);
 
 #endif

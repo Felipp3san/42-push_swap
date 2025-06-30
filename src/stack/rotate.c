@@ -6,11 +6,11 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:29:31 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/28 21:25:05 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:19:46 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack_core.h"
 
 static void	rotate(t_stack *stack)
 {
@@ -32,7 +32,7 @@ static void	rotate(t_stack *stack)
 /* ra (rotate a): Shift up all elements of stack a by 1.
 	The first element becomes the last one. */
 
-void	rotate_a(t_ps *data)
+void	rotate_a(t_stacks *data)
 {
 	rotate(&data->a);
 	store_op(data, ra);
@@ -41,7 +41,7 @@ void	rotate_a(t_ps *data)
 /* rb (rotate b): Shift up all elements of stack b by 1.
 	The first element becomes the last one. */
 
-void	rotate_b(t_ps *data)
+void	rotate_b(t_stacks *data)
 {
 	rotate(&data->b);
 	store_op(data, rb);
@@ -49,7 +49,7 @@ void	rotate_b(t_ps *data)
 
 /* rr : ra and rb at the same time. */
 
-void	rotate_a_b(t_ps *data)
+void	rotate_a_b(t_stacks *data)
 {
 	rotate(&data->a);
 	rotate(&data->b);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack_core.h"
 
 static void	swap(t_stack *stack)
 {
@@ -28,7 +28,7 @@ static void	swap(t_stack *stack)
 /* sa (swap a): Swap the first 2 elements at the top of stack a.
 	Do nothing if there is only one element or none. */
 
-void	swap_a(t_ps *data)
+void	swap_a(t_stacks *data)
 {
 	swap(&data->a);
 	store_op(data, sa);
@@ -37,7 +37,7 @@ void	swap_a(t_ps *data)
 /* sb (swap b): Swap the first 2 elements at the top of stack b.
 	Do nothing if there is only one element or none. */
 
-void	swap_b(t_ps *data)
+void	swap_b(t_stacks *data)
 {
 	swap(&data->b);
 	store_op(data, sb);
@@ -45,7 +45,7 @@ void	swap_b(t_ps *data)
 
 /* ss : sa and sb at the same time. */
 
-void	swap_ab(t_ps *data)
+void	swap_ab(t_stacks *data)
 {
 	swap(&data->a);
 	swap(&data->b);

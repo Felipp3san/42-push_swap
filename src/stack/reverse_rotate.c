@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack_core.h"
 
 static void	reverse_rotate(t_stack *stack)
 {
@@ -34,7 +34,7 @@ static void	reverse_rotate(t_stack *stack)
 /* rra (reverse rotate a): Shift down all elements of stack a by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_a(t_ps *data)
+void	reverse_rotate_a(t_stacks *data)
 {
 	reverse_rotate(&data->a);
 	store_op(data, rra);
@@ -43,7 +43,7 @@ void	reverse_rotate_a(t_ps *data)
 /* rrb (reverse rotate b): Shift down all elements of stack b by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_b(t_ps *data)
+void	reverse_rotate_b(t_stacks *data)
 {
 	reverse_rotate(&data->b);
 	store_op(data, rrb);
@@ -51,7 +51,7 @@ void	reverse_rotate_b(t_ps *data)
 
 /* rrr : rra and rrb at the same time. */
 
-void	reverse_rotate_a_b(t_ps *data)
+void	reverse_rotate_a_b(t_stacks *data)
 {
 	reverse_rotate(&data->a);
 	reverse_rotate(&data->b);

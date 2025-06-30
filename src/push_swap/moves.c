@@ -6,18 +6,18 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:28:54 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 22:03:08 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:12:34 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	move_from_top_a(t_ps *data, t_loc to);
-void	move_from_bottom_a(t_ps *data, t_loc to);
-void	move_from_top_b(t_ps *data, t_loc to);
-void	move_from_bottom_b(t_ps *data, t_loc to);
+static void	move_from_top_a(t_stacks *data, t_loc to);
+static void	move_from_bottom_a(t_stacks *data, t_loc to);
+static void	move_from_top_b(t_stacks *data, t_loc to);
+static void	move_from_bottom_b(t_stacks *data, t_loc to);
 
-int	move_from_to(t_ps *data, t_loc from, t_loc to)
+int	move_from_to(t_stacks *data, t_loc from, t_loc to)
 {
 	if (from == TOP_A)
 		move_from_top_a(data, to);
@@ -30,7 +30,7 @@ int	move_from_to(t_ps *data, t_loc from, t_loc to)
 	return (1);
 }
 
-void	move_from_top_a(t_ps *data, t_loc to)
+static void	move_from_top_a(t_stacks *data, t_loc to)
 {
 	if (to == BOTTOM_A)
 		rotate_a(data);
@@ -43,7 +43,7 @@ void	move_from_top_a(t_ps *data, t_loc to)
 	}
 }
 
-void	move_from_bottom_a(t_ps *data, t_loc to)
+static void	move_from_bottom_a(t_stacks *data, t_loc to)
 {
 	if (to == TOP_A)
 		reverse_rotate_a(data);
@@ -60,7 +60,7 @@ void	move_from_bottom_a(t_ps *data, t_loc to)
 	}
 }
 
-void	move_from_top_b(t_ps *data, t_loc to)
+static void	move_from_top_b(t_stacks *data, t_loc to)
 {
 	if (to == BOTTOM_B)
 		rotate_b(data);
@@ -73,7 +73,7 @@ void	move_from_top_b(t_ps *data, t_loc to)
 	}
 }
 
-void	move_from_bottom_b(t_ps *data, t_loc to)
+static void	move_from_bottom_b(t_stacks *data, t_loc to)
 {
 	if (to == TOP_B)
 		reverse_rotate_b(data);

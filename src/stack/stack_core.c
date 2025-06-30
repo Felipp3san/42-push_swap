@@ -6,22 +6,28 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:12:49 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 02:05:41 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:14:17 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack_core.h"
 
-int	init_stack(t_stack *stack, size_t capacity)
+void	init_stacks(t_stacks *data, size_t capacity)
 {
-	stack->collection = (int *) malloc(sizeof(int) * capacity);
-	if (!stack->collection)
-		return (MALLOC_ERROR);
-	stack->capacity = capacity;
-	stack->size = 0;
-	stack->top = -1;
-	stack->bottom = 0;
-	return (SUCCESS);
+	data->a.collection = (int *) malloc(sizeof(int) * capacity);
+	if (!data->a.collection)
+		error(data);
+	data->a.capacity = capacity;
+	data->a.size = 0;
+	data->a.top = -1;
+	data->a.bottom = 0;
+	data->b.collection = (int *) malloc(sizeof(int) * capacity);
+	if (!data->b.collection)
+		error(data);
+	data->b.capacity = capacity;
+	data->b.size = 0;
+	data->b.top = -1;
+	data->b.bottom = 0;
 }
 
 t_bool	is_full(t_stack *stack)

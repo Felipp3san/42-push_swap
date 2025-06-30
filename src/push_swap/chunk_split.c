@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 19:09:51 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/29 23:12:30 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:21:28 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	find_pivots(t_chunk *chunk, int	*pivot_mid, int *pivot_max);
 
-void	chunk_split(t_ps *data, t_chunk *chunk, t_chunks *dest)
+void	chunk_split(t_stacks *data, t_chunk *chunk, t_chunks *dest)
 {
 	int	pivot_max;
 	int	pivot_mid;

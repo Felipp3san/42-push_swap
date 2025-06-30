@@ -1,36 +1,36 @@
 # Variables
-CC		= cc
-RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror -g
+CC		:= cc
+RM		:= rm -f
+CFLAGS	:= -Wall -Wextra -Werror -g
 
 # Names
-NAME	= push_swap
-LIBFT	= libft.a
-
-# Includes & Links
-INCLUDE	= -I$(INCLUDE_DIR) -I$(LIBFT_DIR)/include
-LINK	= -Llibft -lft
+NAME	:= push_swap
+LIBFT	:= libft.a
 
 # Folders
-INCLUDE_DIR = include
-BUILD_DIR	= build
-LIBFT_DIR	= libft
-SRC_DIR		= src
+INCLUDE_DIR := include
+BUILD_DIR	:= build
+LIBFT_DIR	:= libft
+SRC_DIR		:= src
+
+# Includes & Links
+INCLUDE	:= -I$(INCLUDE_DIR) -I$(LIBFT_DIR)/include
+LINK	:= -Llibft -lft
 
 # Colors
-DEF_COLOR	= \033[0;39m
-GRAY		= \033[0;90m
-RED			= \033[0;91m
-GREEN		= \033[0;92m
-YELLOW		= \033[0;93m
-BLUE		= \033[0;94m
-MAGENTA		= \033[0;95m
-CYAN		= \033[0;96m
-WHITE		= \033[0;97m
+DEF_COLOR	:= \033[0;39m
+GRAY		:= \033[0;90m
+RED			:= \033[0;91m
+GREEN		:= \033[0;92m
+YELLOW		:= \033[0;93m
+BLUE		:= \033[0;94m
+MAGENTA		:= \033[0;95m
+CYAN		:= \033[0;96m
+WHITE		:= \033[0;97m
 
 # Files
-SRCS	= $(wildcard $(SRC_DIR)/*.c)
-OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+SRCS	:= $(wildcard $(SRC_DIR)/**/*.c)
+OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 # Rules
 all: $(NAME)
@@ -43,13 +43,10 @@ $(LIBFT):
 	@printf "$(CYAN)Compiling libft... $< $(DEF_COLOR)\n"
 	@make -C $(LIBFT_DIR) all
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	@printf "$(YELLOW)Compiling: $< $(DEF_COLOR)\n"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-$(BUILD_DIR):
-	@printf "$(MAGENTA)Build dir not found. Creating...$(DEF_COLOR)\n"
-	@mkdir -p $(BUILD_DIR)
 	
 clean:
 	@rm -rf $(BUILD_DIR)
