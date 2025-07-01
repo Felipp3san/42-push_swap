@@ -2,3 +2,4 @@ push_swap_visualizer
 compile_commands.json
 build
 push_swap
+.cache
