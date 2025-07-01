@@ -15,27 +15,25 @@
 /* pa (push a): Take the first element at the top of b and put it at the
 	top of a. Do nothing if b is empty. */
 
-void	push_a(t_stacks *data)
+void	push_a(t_stack *a, t_stack *b)
 {
 	int	item;
 
-	if (is_empty(&data->b))
+	if (is_empty(a))
 		return ;
-	pop(&data->b, &item);
-	push(&data->a, item);
-	store_op(data, pa);
+	pop(b, &item);
+	push(a, item);
 }
 
 /* pb (push b): Take the first element at the top of a and put it at the
 	top of b. Do nothing if a is empty. */
 
-void	push_b(t_stacks *data)
+void	push_b(t_stack *a, t_stack *b)
 {
 	int	item;
 
-	if (is_empty(&data->a))
+	if (is_empty(a))
 		return ;
-	pop(&data->a, &item);
-	push(&data->b, item);
-	store_op(data, pb);
+	pop(a, &item);
+	push(b, item);
 }

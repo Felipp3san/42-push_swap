@@ -12,6 +12,18 @@
 
 #include "stack_core.h"
 
+/* True is stack is full, otherwise False */
+t_bool	is_full(t_stack *stack)
+{
+	return (stack->size == stack->capacity);
+}
+
+/* True is stack is empty, otherwise False */
+t_bool	is_empty(t_stack *stack)
+{
+	return (stack->size == 0);
+}
+
 /* 0: top value - 1: below top value ...*/
 int	value_from_top(t_stack *stack, int position)
 {
@@ -35,55 +47,4 @@ size_t	next_up(t_stack *stk, size_t idx)
 	if (idx >= stk->size - 1)
 		return (idx);
 	return (++idx);
-}
-
-/* Validates if the stack is sorted on specified direction */
-t_bool	is_sorted(t_stack *stack, t_dir direction)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < stack->size - 1)
-	{
-		if (direction == DESC)
-		{
-			if (stack->collection[i] > stack->collection[i + 1])
-				return (FALSE);
-		}
-		else
-		{
-			if (stack->collection[i] < stack->collection[i + 1])
-				return (FALSE);
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-/* Counts how many numbers are smaller than element, and replace the element
- * with this value. */
-int	normalize_stack(t_stack *stack)
-{
-	size_t	i;
-	size_t	j;
-	int		*new_values;
-
-	new_values = (int *) ft_calloc(stack->size, sizeof(int));
-	if (!new_values)
-		return (MALLOC_ERROR);
-	i = 0;
-	while (i < stack->size)
-	{
-		j = 0;
-		while (j < stack->size)
-		{
-			if (stack->collection[j] < stack->collection[i])
-				new_values[i] += 1;
-			j++;
-		}
-		i++;
-	}
-	free(stack->collection);
-	stack->collection = new_values;
-	return (0);
 }

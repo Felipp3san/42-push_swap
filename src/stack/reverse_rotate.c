@@ -34,26 +34,23 @@ static void	reverse_rotate(t_stack *stack)
 /* rra (reverse rotate a): Shift down all elements of stack a by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_a(t_stacks *data)
+void	reverse_rotate_a(t_stack *a)
 {
-	reverse_rotate(&data->a);
-	store_op(data, rra);
+	reverse_rotate(a);
 }
 
 /* rrb (reverse rotate b): Shift down all elements of stack b by 1.
 	The last element becomes the first one. */
 
-void	reverse_rotate_b(t_stacks *data)
+void	reverse_rotate_b(t_stack *b)
 {
-	reverse_rotate(&data->b);
-	store_op(data, rrb);
+	reverse_rotate(b);
 }
 
 /* rrr : rra and rrb at the same time. */
 
-void	reverse_rotate_a_b(t_stacks *data)
+void	reverse_rotate_a_b(t_stack *a, t_stack *b)
 {
-	reverse_rotate(&data->a);
-	reverse_rotate(&data->b);
-	store_op(data, rrr);
+	reverse_rotate(a);
+	reverse_rotate(b);
 }

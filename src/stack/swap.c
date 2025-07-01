@@ -28,26 +28,23 @@ static void	swap(t_stack *stack)
 /* sa (swap a): Swap the first 2 elements at the top of stack a.
 	Do nothing if there is only one element or none. */
 
-void	swap_a(t_stacks *data)
+void	swap_a(t_stack *a)
 {
-	swap(&data->a);
-	store_op(data, sa);
+	swap(a);
 }
 
 /* sb (swap b): Swap the first 2 elements at the top of stack b.
 	Do nothing if there is only one element or none. */
 
-void	swap_b(t_stacks *data)
+void	swap_b(t_stack *b)
 {
-	swap(&data->b);
-	store_op(data, sb);
+	swap(b);
 }
 
 /* ss : sa and sb at the same time. */
 
-void	swap_ab(t_stacks *data)
+void	swap_a_b(t_stack *a, t_stack *b)
 {
-	swap(&data->a);
-	swap(&data->b);
-	store_op(data, ss);
+	swap_a(a);
+	swap_b(b);
 }

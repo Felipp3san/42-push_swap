@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:39:42 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/06/30 12:38:31 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:47:19 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,33 @@ void	fill_stack(t_stack *stack, char *argv[])
 	}
 }
 
-void	sort(t_stacks *data)
+void	sort(t_ps *data)
 {
 	if (data->a.size <= 1 || is_sorted(&data->a, ASC))
 		return ;
 	if (data->a.size == 3)
-		return ;
+		easy_sort_three(data);
 	else if (data->a.size == 5)
-		sort_five(data);
+		easy_sort_five(data);
 	else
 		chunk_sort(data);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_stacks	data;
-	size_t		size;
+	t_ps	data;
+	size_t	size;
 
 	if (argc > 1)
 	{
 		size = argc - 1;
-		init_stacks(&data, size);
+		init_ps(&data, size);
 		fill_stack(&data.a, argv);
 		normalize_stack(&data.a);
 		sort(&data);
+		optimize_ops(&data);
 		print_ops(&data);
-		clear_stacks(&data);
+		clear_ps(&data);
 	}
 	return (EXIT_SUCCESS);
 }

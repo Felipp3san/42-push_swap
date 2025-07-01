@@ -12,32 +12,28 @@
 
 #include "stack_core.h"
 
-void	init_stacks(t_stacks *data, size_t capacity)
+int	init_stack(t_stack *stack, int capacity)
 {
-	data->a.collection = (int *) malloc(sizeof(int) * capacity);
-	if (!data->a.collection)
-		error(data);
-	data->a.capacity = capacity;
-	data->a.size = 0;
-	data->a.top = -1;
-	data->a.bottom = 0;
-	data->b.collection = (int *) malloc(sizeof(int) * capacity);
-	if (!data->b.collection)
-		error(data);
-	data->b.capacity = capacity;
-	data->b.size = 0;
-	data->b.top = -1;
-	data->b.bottom = 0;
+	stack->collection = (int *) malloc(sizeof(int) * capacity);
+	if (!stack->collection)
+		return (MALLOC_ERROR);
+	stack->capacity = capacity;
+	stack->size = 0;
+	stack->top = -1;
+	stack->bottom = 0;
+	return (SUCCESS);
 }
 
-t_bool	is_full(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
-	return (stack->size == stack->capacity);
-}
-
-t_bool	is_empty(t_stack *stack)
-{
-	return (stack->size == 0);
+	if (stack)
+	{
+		free(stack->collection);
+		stack->collection = NULL;
+		stack->size = 0;
+		stack->top = -1;
+		stack->bottom = 0;
+	}
 }
 
 void	push(t_stack *stack, int item)

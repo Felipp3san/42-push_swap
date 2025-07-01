@@ -32,26 +32,23 @@ static void	rotate(t_stack *stack)
 /* ra (rotate a): Shift up all elements of stack a by 1.
 	The first element becomes the last one. */
 
-void	rotate_a(t_stacks *data)
+void	rotate_a(t_stack *a)
 {
-	rotate(&data->a);
-	store_op(data, ra);
+	rotate(a);
 }
 
 /* rb (rotate b): Shift up all elements of stack b by 1.
 	The first element becomes the last one. */
 
-void	rotate_b(t_stacks *data)
+void	rotate_b(t_stack *b)
 {
-	rotate(&data->b);
-	store_op(data, rb);
+	rotate(b);
 }
 
 /* rr : ra and rb at the same time. */
 
-void	rotate_a_b(t_stacks *data)
+void	rotate_a_b(t_stack *a, t_stack *b)
 {
-	rotate(&data->a);
-	rotate(&data->b);
-	store_op(data, rr);
+	rotate(a);
+	rotate(b);
 }

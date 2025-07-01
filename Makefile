@@ -29,11 +29,14 @@ CYAN		:= \033[0;96m
 WHITE		:= \033[0;97m
 
 # Files
-SRCS	:= $(wildcard $(SRC_DIR)/**/*.c)
+SRCS	:= $(shell find $(SRC_DIR) -name "*.c" -type f)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 # Rules
 all: $(NAME)
+
+print:
+	$(SRCS)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJS) $(LINK) -o $(NAME)

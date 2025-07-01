@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_stack	*loc_to_stack(t_stacks *data, t_loc loc)
+t_stack	*loc_to_stack(t_ps *data, t_loc loc)
 {
 	if (loc == TOP_A || loc == BOTTOM_A)
 		return (&data->a);
@@ -20,9 +20,9 @@ t_stack	*loc_to_stack(t_stacks *data, t_loc loc)
 		return (&data->b);
 }
 
-int	chunk_value(t_stacks *data, t_chunk *chunk)
+int	chunk_value(t_ps *data, t_chunk *chunk)
 {
-	t_stack *stack;
+	t_stack	*stack;
 	t_loc	from;
 
 	from = chunk->loc;
@@ -33,7 +33,7 @@ int	chunk_value(t_stacks *data, t_chunk *chunk)
 		return (stack->collection[stack->bottom]);
 }
 
-int	chunk_max_value(t_stacks *data, t_chunk *chunk)
+int	chunk_max_value(t_ps *data, t_chunk *chunk)
 {
 	t_stack	*stack;
 	size_t	size;
