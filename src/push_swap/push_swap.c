@@ -11,16 +11,76 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-void	fill_stack(t_stack *stack, char *argv[])
+static void	free_split(char **arr)
 {
-	size_t	i;
+	int	i;
 
+	if (!arr)
+		return;
 	i = 0;
-	while (i < stack->capacity)
+	while (arr[i])
 	{
-		push(stack, ft_atoi(argv[stack->capacity - i]));
+		free(arr[i]);
 		i++;
+	}
+	free(arr);
+}
+
+t_list	*parse_arguments(char *argv[], int argc)
+{
+	char	**numbers;
+	char	*content;
+	t_list	*arg_list;
+	t_list	*node;
+	int		i;
+	int		j;
+	
+	i = 1;
+	arg_list = NULL;
+	while (i < argc)
+	{
+		numbers = ft_split(argv[i], ' ');
+		if (!numbers)
+		{
+			ft_lstclear(&arg_list, free);
+			exit(EXIT_FAILURE);
+		}
+		j = 0;
+		while (numbers[j])
+		{
+			content = ft_strdup(numbers[j]);
+			if (!content)
+			{
+				free_split(numbers);
+				ft_lstclear(&arg_list, free);
+				exit(EXIT_FAILURE);
+			}
+			node = ft_lstnew(content);
+			if (!node)
+			{
+				free(content);
+				free_split(numbers);
+				ft_lstclear(&arg_list, free);
+				exit(EXIT_FAILURE);
+			}
+			ft_lstadd_back(&arg_list, node);
+			j++;
+		}
+		free_split(numbers);
+		i++;
+	}
+	return (arg_list);
+}
+
+void	fill_stack(t_stack *stack, t_list *arg_list)
+{
+	while (arg_list)
+	{
+		push(stack, ft_atoi((char *)arg_list->content));
+		arg_list = arg_list->next;
 	}
 }
 
@@ -39,13 +99,16 @@ void	sort(t_ps *data)
 int	main(int argc, char *argv[])
 {
 	t_ps	data;
+	t_list	*arg_list;
 	size_t	size;
 
 	if (argc > 1)
 	{
-		size = argc - 1;
+		arg_list = parse_arguments(argv, argc);
+		size = ft_lstsize(arg_list);
 		init_ps(&data, size);
-		fill_stack(&data.a, argv);
+		fill_stack(&data.a, arg_list);
+		ft_lstclear(&arg_list, free);
 		normalize_stack(&data.a);
 		sort(&data);
 		optimize_ops(&data);
