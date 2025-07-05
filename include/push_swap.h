@@ -16,6 +16,9 @@
 # include "stack_core.h"
 # include "libft.h"
 
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
+
 typedef enum e_dir
 {
 	ASC,
@@ -103,5 +106,9 @@ void	sort_three(t_ps *data, t_chunk *chunk);
 void	store_op(t_ps *data, t_op op);
 void	print_ops(t_ps *data);
 void	optimize_ops(t_ps *data);
+
+// parser.c
+t_list	*parse_args(char *argv[], int argc);
+void	validate_args(t_list **arg_list);
 
 #endif

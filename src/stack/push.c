@@ -19,7 +19,7 @@ void	push_a(t_stack *a, t_stack *b)
 {
 	int	item;
 
-	if (is_empty(a))
+	if (is_empty(b))
 		return ;
 	pop(b, &item);
 	push(a, item);

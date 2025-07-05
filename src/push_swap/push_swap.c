@@ -6,7 +6,7 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:39:42 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:47:19 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:51:52 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	free_split(char **arr)
+void	fill_stack(t_ps *data, t_list *arg_list)
 {
-	int	i;
+	t_stack	*a;
+	t_stack	*b;
 
-	if (!arr)
-		return;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-t_list	*parse_arguments(char *argv[], int argc)
-{
-	char	**numbers;
-	char	*content;
-	t_list	*arg_list;
-	t_list	*node;
-	int		i;
-	int		j;
-	
-	i = 1;
-	arg_list = NULL;
-	while (i < argc)
-	{
-		numbers = ft_split(argv[i], ' ');
-		if (!numbers)
-		{
-			ft_lstclear(&arg_list, free);
-			exit(EXIT_FAILURE);
-		}
-		j = 0;
-		while (numbers[j])
-		{
-			content = ft_strdup(numbers[j]);
-			if (!content)
-			{
-				free_split(numbers);
-				ft_lstclear(&arg_list, free);
-				exit(EXIT_FAILURE);
-			}
-			node = ft_lstnew(content);
-			if (!node)
-			{
-				free(content);
-				free_split(numbers);
-				ft_lstclear(&arg_list, free);
-				exit(EXIT_FAILURE);
-			}
-			ft_lstadd_back(&arg_list, node);
-			j++;
-		}
-		free_split(numbers);
-		i++;
-	}
-	return (arg_list);
-}
-
-void	fill_stack(t_stack *stack, t_list *arg_list)
-{
+	a = &data->a;
+	b = &data->b;
 	while (arg_list)
 	{
-		push(stack, ft_atoi((char *)arg_list->content));
+		push(b, ft_atoi((char *)arg_list->content));
 		arg_list = arg_list->next;
 	}
+	while (!is_empty(b))
+		push_a(a, b);
 }
 
 void	sort(t_ps *data)
@@ -104,10 +50,11 @@ int	main(int argc, char *argv[])
 
 	if (argc > 1)
 	{
-		arg_list = parse_arguments(argv, argc);
+		arg_list = parse_args(argv, argc);
+		validate_args(&arg_list);
 		size = ft_lstsize(arg_list);
 		init_ps(&data, size);
-		fill_stack(&data.a, arg_list);
+		fill_stack(&data, arg_list);
 		ft_lstclear(&arg_list, free);
 		normalize_stack(&data.a);
 		sort(&data);

@@ -21,9 +21,6 @@
 # include <stdint.h>
 # include "get_next_line.h"
 
-# define MALLOC_ERROR -1
-# define SUCCESS 0
-
 typedef struct s_list
 {
 	void			*content;
@@ -67,6 +64,7 @@ int		ft_dprintf(int fd, const char *fstring, ...);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_printf(const char *fstring, ...);
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
