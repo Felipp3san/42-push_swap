@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_wrapper.c                                     :+:      :+:    :+:   */
+/*   program_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:12:33 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/08 10:49:04 by fde-alme         ###   ########.fr       */
+/*   Created: 2025/07/08 11:41:25 by fde-alme          #+#    #+#             */
+/*   Updated: 2025/07/08 11:46:29 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "shared.h"
 
-void	ps_push_a(t_data *data)
+void	error(t_data *data)
 {
-	push_a(&data->a, &data->b);
-	store_op(data, pa);
+	clear_data(data);
+	exit(EXIT_FAILURE);
 }
 
-void	ps_push_b(t_data *data)
+void	clear_data(t_data *data)
 {
-	push_b(&data->a, &data->b);
-	store_op(data, pb);
+	free_stack(&data->a);
+	free_stack(&data->b);
+	ft_lstclear(&data->op_list, free);
+}
+
+void	init_data(t_data *data, size_t capacity)
+{
+	if (init_stack(&data->a, capacity) == MALLOC_ERROR)
+		error(data);
+	if (init_stack(&data->b, capacity) == MALLOC_ERROR)
+		error(data);
+	data->op_list = NULL;
 }

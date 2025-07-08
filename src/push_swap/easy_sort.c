@@ -6,16 +6,15 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 21:44:49 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:16:36 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:52:40 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "wrappers.h"
 
 static int	get_max(t_stack *stack);
 
-void	easy_sort_three(t_ps *data)
+void	easy_sort_three(t_data *data)
 {
 	t_stack	*a;
 	int		max;
@@ -33,7 +32,7 @@ void	easy_sort_three(t_ps *data)
 	}
 }
 
-void	easy_sort_five(t_ps *data)
+void	easy_sort_five(t_data *data)
 {
 	t_stack	*a;
 	t_stack	*b;

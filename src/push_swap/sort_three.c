@@ -6,19 +6,18 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 14:51:34 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:16:52 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:54:52 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "wrappers.h"
 
-static void	sort_three_top_a(t_ps *data, t_chunk *chunk, int max);
-static void	sort_three_bottom_a(t_ps *data, t_chunk *chunk, int max);
-static void	sort_three_top_b(t_ps *data, t_chunk *chunk, int max);
-static void	sort_three_bottom_b(t_ps *data, t_chunk *chunk, int max);
+static void	sort_three_top_a(t_data *data, t_chunk *chunk, int max);
+static void	sort_three_bottom_a(t_data *data, t_chunk *chunk, int max);
+static void	sort_three_top_b(t_data *data, t_chunk *chunk, int max);
+static void	sort_three_bottom_b(t_data *data, t_chunk *chunk, int max);
 
-void	sort_three(t_ps *data, t_chunk *chunk)
+void	sort_three(t_data *data, t_chunk *chunk)
 {
 	int		max_value;
 
@@ -33,7 +32,7 @@ void	sort_three(t_ps *data, t_chunk *chunk)
 		sort_three_bottom_b(data, chunk, max_value);
 }
 
-static void	sort_three_top_a(t_ps *data, t_chunk *chunk, int max)
+static void	sort_three_top_a(t_data *data, t_chunk *chunk, int max)
 {
 	t_stack	*stack;
 
@@ -56,7 +55,7 @@ static void	sort_three_top_a(t_ps *data, t_chunk *chunk, int max)
 	sort_two(data, chunk);
 }
 
-static void	sort_three_bottom_a(t_ps *data, t_chunk *chunk, int max)
+static void	sort_three_bottom_a(t_data *data, t_chunk *chunk, int max)
 {
 	t_stack	*stack;
 
@@ -82,7 +81,7 @@ static void	sort_three_bottom_a(t_ps *data, t_chunk *chunk, int max)
 	sort_two(data, chunk);
 }
 
-void	sort_three_top_b(t_ps *data, t_chunk *chunk, int max)
+void	sort_three_top_b(t_data *data, t_chunk *chunk, int max)
 {
 	t_stack	*stack;
 
@@ -107,7 +106,7 @@ void	sort_three_top_b(t_ps *data, t_chunk *chunk, int max)
 	sort_two(data, chunk);
 }
 
-static void	sort_three_bottom_b(t_ps *data, t_chunk *chunk, int max)
+static void	sort_three_bottom_b(t_data *data, t_chunk *chunk, int max)
 {
 	t_stack	*stack;
 

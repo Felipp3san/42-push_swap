@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:45:10 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:44:26 by fde-alme         ###   ########.fr       */
+/*   Created: 2025/07/08 10:58:58 by fde-alme          #+#    #+#             */
+/*   Updated: 2025/07/08 11:45:59 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "shared.h"
 
-void	error(t_ps *data)
+void	fill_stack(t_data *data, t_list *arg_list)
 {
-	clear_ps(data);
-	exit(EXIT_FAILURE);
-}
+	t_stack	*a;
+	t_stack	*b;
 
-void	clear_ps(t_ps *data)
-{
-	free_stack(&data->a);
-	free_stack(&data->b);
-	ft_lstclear(&data->op_list, free);
-}
-
-void	init_ps(t_ps *data, size_t capacity)
-{
-	if (init_stack(&data->a, capacity) == MALLOC_ERROR)
-		error(data);
-	if (init_stack(&data->b, capacity) == MALLOC_ERROR)
-		error(data);
-	data->op_list = NULL;
+	a = &data->a;
+	b = &data->b;
+	while (arg_list)
+	{
+		push(b, ft_atoi((char *)arg_list->content));
+		arg_list = arg_list->next;
+	}
+	while (!is_empty(b))
+		push_a(a, b);
 }
 
 /* Counts how many numbers are smaller than element, and replace it 

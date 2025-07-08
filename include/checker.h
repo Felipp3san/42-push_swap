@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wrappers.h                                         :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 15:10:03 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:20:09 by fde-alme         ###   ########.fr       */
+/*   Created: 2025/07/08 10:21:31 by fde-alme          #+#    #+#             */
+/*   Updated: 2025/07/08 11:05:45 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRAPPERS_H
-# define WRAPPERS_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
-# include "push_swap.h"
+#include "shared.h"
 
-void	ps_swap_a(t_ps *data);
-void	ps_swap_b(t_ps *data);
-void	ps_swap_a_b(t_ps *data);
-void	ps_push_a(t_ps *data);
-void	ps_push_b(t_ps *data);
-void	ps_rotate_a(t_ps *data);
-void	ps_rotate_b(t_ps *data);
-void	ps_rotate_a_b(t_ps *data);
-void	ps_reverse_rotate_a(t_ps *data);
-void	ps_reverse_rotate_b(t_ps *data);
-void	ps_reverse_rotate_a_b(t_ps *data);
+typedef struct s_stacks
+{
+	t_stack	a;
+	t_stack	b;
+}	t_stacks;
 
 #endif

@@ -6,14 +6,15 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:50:57 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/05 19:58:40 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:10:12 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "shared.h"
 
-static void		free_split(char **arr);
-static void		add_to_list(t_list **arg_list, char **numbers);
+static void	free_split(char **arr);
+static void	add_to_list(t_list **arg_list, char **numbers);
+static char **split_preserving_empty(char *arg);
 
 t_list	*parse_args(char *argv[], int argc)
 {
@@ -25,7 +26,7 @@ t_list	*parse_args(char *argv[], int argc)
 	arg_list = NULL;
 	while (i < argc)
 	{
-		numbers = ft_split(argv[i], ' ');
+		numbers = split_preserving_empty(argv[i]);
 		if (!numbers)
 		{
 			ft_lstclear(&arg_list, free);
@@ -36,6 +37,28 @@ t_list	*parse_args(char *argv[], int argc)
 		i++;
 	}
 	return (arg_list);
+}
+
+static char **split_preserving_empty(char *arg)
+{
+	char **numbers;
+
+	if (ft_strcmp(arg, "") == 0)
+	{
+		numbers = malloc(sizeof(char *) * 2);
+		if (!numbers)
+			return (NULL);
+		numbers[0] = ft_strdup("");
+		if (!numbers[0])
+		{
+			free(numbers);
+			return (NULL);
+		}
+		numbers[1] = NULL;
+	}
+	else
+		numbers = ft_split(arg, ' ');
+	return (numbers);
 }
 
 static void	free_split(char **arr)

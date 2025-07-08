@@ -6,14 +6,13 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 12:41:14 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 15:17:06 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:55:05 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "wrappers.h"
 
-void	sort_two(t_ps *data, t_chunk *chunk)
+void	sort_two(t_data *data, t_chunk *chunk)
 {
 	t_loc	from;
 

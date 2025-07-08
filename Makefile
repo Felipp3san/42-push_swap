@@ -3,15 +3,21 @@ CC		:= cc
 RM		:= rm -f
 CFLAGS	:= -Wall -Wextra -Werror -g
 
+# Folders
+INCLUDE_DIR		:= include
+BUILD_DIR		:= build
+LIBFT_DIR		:= libft
+SRC_DIR			:= src
+PUSH_SWAP_DIR	= $(SRC_DIR)/push_swap
+CHECKER_DIR		= $(SRC_DIR)/checker
+SHARED_DIR		= $(SRC_DIR)/shared
+STACK_DIR		= $(SRC_DIR)/stack
+
 # Names
 NAME	:= push_swap
+CHECKER	:= checker
 LIBFT	:= libft.a
-
-# Folders
-INCLUDE_DIR := include
-BUILD_DIR	:= build
-LIBFT_DIR	:= libft
-SRC_DIR		:= src
+LIBFT   := $(LIBFT_DIR)/libft.a
 
 # Includes & Links
 INCLUDE	:= -I$(INCLUDE_DIR) -I$(LIBFT_DIR)/include
@@ -28,18 +34,27 @@ MAGENTA		:= \033[0;95m
 CYAN		:= \033[0;96m
 WHITE		:= \033[0;97m
 
-# Files
-SRCS	:= $(shell find $(SRC_DIR) -name "*.c" -type f)
-OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+# Source lists
+PUSH_SWAP_SRCS	:= $(shell find $(PUSH_SWAP_DIR) -name "*.c" -type f)
+CHECKER_SRCS	:= $(wildcard $(CHECKER_DIR)/*.c)
+SHARED_SRCS		:= $(wildcard $(SHARED_DIR)/*.c)
+STACK_SRCS		:= $(wildcard $(STACK_DIR)/*.c)
+
+# Object lists
+PUSH_SWAP_OBJS	:= $(PUSH_SWAP_SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+CHECKER_OBJS	:= $(CHECKER_SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+SHARED_OBJS		:= $(SHARED_SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+STACK_OBJS		:= $(STACK_SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 # Rules
 all: $(NAME)
 
-print:
-	$(SRCS)
+$(NAME): $(PUSH_SWAP_OBJS) $(SHARED_OBJS) $(STACK_OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $^ $(LINK) -o $(NAME)
+	@printf "$(GREEN)$@ compiled! $(DEF_COLOR)\n"
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(LINK) -o $(NAME)
+bonus: $(CHECKER_OBJS) $(SHARED_OBJS) $(STACK_OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $^ $(LINK) -o $(CHECKER)
 	@printf "$(GREEN)$@ compiled! $(DEF_COLOR)\n"
 
 $(LIBFT):

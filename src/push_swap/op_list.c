@@ -6,14 +6,13 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:21:46 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/01 18:41:26 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:49:23 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "op_utils.h"
 
-void	print_ops(t_ps *data)
+void	print_ops(t_data *data)
 {
 	t_list	*op;
 
@@ -25,17 +24,7 @@ void	print_ops(t_ps *data)
 	}
 }
 
-void	store_op(t_ps *data, t_op op)
-{
-	t_list	*new_node;
-
-	new_node = new_op_node(op);
-	if (!new_node)
-		error(data);
-	ft_lstadd_back(&data->op_list, new_node);
-}
-
-void	optimize_ops(t_ps *data)
+void	optimize_ops(t_data *data)
 {
 	t_list	*new_list;
 	t_list	*new_node;
@@ -62,4 +51,23 @@ void	optimize_ops(t_ps *data)
 	}
 	ft_lstclear(&data->op_list, free);
 	data->op_list = new_list;
+}
+
+t_op	combine_op_pair(t_op op, t_list *next)
+{
+	t_op	next_op;
+	t_op	new_op;
+
+	if (!next || !next->content)
+		return (op);
+	next_op = *(t_op *) next->content;
+	if ((op == sa && next_op == sb) || (op == sb && next_op == sa))
+		new_op = ss;
+	else if ((op == ra && next_op == rb) || (op == rb && next_op == ra))
+		new_op = rr;
+	else if ((op == rra && next_op == rrb) || (op == rrb && next_op == rra))
+		new_op = rrr;
+	else
+		new_op = op;
+	return (new_op);
 }
