@@ -13,9 +13,7 @@
 #ifndef SHARED_H
 # define SHARED_H
 
-# include "libft.h"
 # include "types.h"
-# include "stack_core.h"
 
 // stack_utils.c
 void		fill_stack(t_data *data, t_list *arg_list);

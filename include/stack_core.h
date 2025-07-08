@@ -14,8 +14,6 @@
 # define STACK_CORE_H
 
 # include <stdlib.h>
-# include <stddef.h>
-# include <sys/types.h>
 
 # define MALLOC_ERROR -1
 # define SUCCESS 0
