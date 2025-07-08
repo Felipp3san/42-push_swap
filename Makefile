@@ -73,6 +73,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(CHECKER)
 	@make -C $(LIBFT_DIR) fclean
 	@printf "$(GREEN)libft.a cleaned!$(DEF_COLOR)\n"
 	@printf "$(GREEN)$(NAME) binaries cleaned!$(DEF_COLOR)\n"

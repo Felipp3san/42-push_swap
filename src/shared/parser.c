@@ -14,7 +14,7 @@
 
 static void	free_split(char **arr);
 static void	add_to_list(t_list **arg_list, char **numbers);
-static char **split_preserving_empty(char *arg);
+static char	**split_preserving_empty(char *arg);
 
 t_list	*parse_args(char *argv[], int argc)
 {
@@ -39,9 +39,9 @@ t_list	*parse_args(char *argv[], int argc)
 	return (arg_list);
 }
 
-static char **split_preserving_empty(char *arg)
+static char	**split_preserving_empty(char *arg)
 {
-	char **numbers;
+	char	**numbers;
 
 	if (ft_strcmp(arg, "") == 0)
 	{

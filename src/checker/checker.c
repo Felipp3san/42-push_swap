@@ -6,11 +6,11 @@
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:20:56 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/07/08 11:58:02 by fde-alme         ###   ########.fr       */
+/*   Updated: 2025/07/08 20:15:03 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "shared.h"
 
 void	trim_newline(char *str)
 {
