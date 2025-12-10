@@ -31,7 +31,7 @@ pb
 
 - Handles all input edge cases (duplicates, invalid input, etc.)
 - Efficient for large datasets while respecting project constraints
-- Well-commented code following 42 norms
+- Follows 42 norms
 
 ## Visualizer
 
@@ -48,8 +48,22 @@ make
 
 ## Compilation
 
+- Build the executable:
+
 ```bash
 make
+```
+
+- Remove object files:
+
+```bash
+make clean
+```
+
+- Remove all binaries and rebuild:
+
+```bash
+make re
 ```
 
 ## How it Works
